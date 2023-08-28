@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Live Vehicle Data Map</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Add references to the Azure Maps Map control JavaScript and CSS files. -->
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.css" type="text/css">
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas.min.js"></script>
+
+    <!-- Add a reference to the Azure Maps Services Module JavaScript file. -->
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/2/atlas-service.min.js"></script>
+    <!-- Animations -->
+    <script src="./js/azure-maps-animations.min.js"></script>
+    <!-- Promise based http client. https://github.com/axios/axios -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- SignalR -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+
+    <script>
+        console.log('Start JS');
+        // const baseurl = 'http://localhost:7071';
+        const baseurl = '<YOUR FUNCTION APP URL>';  //<= Change value here
+        var map, pin, lineSource, pinSource;
+        var animation;
+        var map, tileLayer;
+        var weatherTileUrl = 'https://{azMapsDomain}/map/tile?api-version=2.0&tilesetId={layerName}&zoom={z}&x={x}&y={y}';
+
+
+        function GetMap() {
+            //Instantiate a map object
+            map = new atlas.Map("myMap", {
+                //Add your Azure Maps subscription key to the map SDK. Get an Azure Maps key at https://azure.com/maps
+                authOptions: {
+                    authType: 'subscriptionKey',
+                    subscriptionKey: '<YOUR AZURE MAPS SUBSCRIPTION KEY>' //<= Change value here
+                },
+                style: "terra",
+                zoom: 12.5,
+                center: [-73.561668, 45.508888],
+                view: 'Auto',
+            });
+
+            map.controls.add([
+                new atlas.control.ZoomControl(),
+                new atlas.control.CompassControl(),
+                new atlas.control.PitchControl(),
+                new atlas.control.StyleControl({ mapStyles: ['road', 'grayscale_dark', 'night', 'road_shaded_relief', 'satellite', 'satellite_road_labels'] })
+            ],
+                {
+                    position: "top-right"
+                });
+
+
+            //Wait until the map resources are ready.
+            console.log('Map Ready');
+            map.events.add('ready', function () {
+
+                //Initialize the vehicle icon layers
+                // CHANGE THE WEB APP URL IF NEEDED TO POINT TO THE PICTURES!
+                map.imageSprite.add('full-icon', 'https://franmer-logisitcwebapp.azurewebsites.net/images/noun-bus-noir.svg');
+                map.imageSprite.add('fewseats-icon', 'https://franmer-logisitcwebapp.azurewebsites.net/images/noun-bus-jaune.svg');
+                map.imageSprite.add('standing-icon', 'https://franmer-logisitcwebapp.azurewebsites.net/images/noun-bus-rouge.svg');
+                map.imageSprite.add('bus-icon', 'https://franmer-logisitcwebapp.azurewebsites.net/images/noun-bus-bleu.svg');
+
+
+                //Initialize the weather tile layer.
+                updateTileLayer();
+
+                //Create the vehicle data source and add it to the map
+                //datasource = new atlas.source.DataSource();
+
+                // =============== Clustering =======================
+                datasource = new atlas.source.DataSource(null, { cluster: true, clusterRadius: 30, clusterMaxZoom: 15 });
+                map.sources.add(datasource);
+
+                //Create a bubble layer for rendering clustered data points.
+                var clusterBubbleLayer = new atlas.layer.BubbleLayer(datasource, null, {
+                    //Scale the size of the clustered bubble based on the number of points in the cluster.
+                    radius: [
+                        'step',
+                        ['get', 'point_count'],
+                        10,         //Default of 20 pixel radius.
+                        20, 30,    //If point_count >= 10, radius is 30 pixels.
+                        50, 40     //If point_count >= 750, radius is 40 pixels.
+                    ],
+
+                    //Change the color of the cluster based on the value on the point_cluster property of the cluster.
+                    color: [
+                        'step',
+                        ['get', 'point_count'],
+                        'lime',            //Default to lime green. 
+                        20, 'yellow',     //If the point_count >= 100, color is yellow.
+                        50, 'red'        //If the point_count >= 100, color is red.
+                    ],
+                    //radius: 2,
+                    //color: '#007faa',
+                    strokeWidth: 0,
+                    //filter: ['has', 'point_count'] //Only rendered data points which have a point_count property, which clusters do.
+                    filter: ['has', 'point_count']
+                });
+
+                //Add the clusterBubbleLayer and two additional layers to the map.
+                map.layers.add([
+                    clusterBubbleLayer,
+
+                    //Create a symbol layer to render the count of locations in a cluster.
+                    new atlas.layer.SymbolLayer(datasource, null, {
+                        iconOptions: {
+                            image: 'none' //Hide the icon image.
+                        },
+                        textOptions: {
+                            textField: ['get', 'point_count_abbreviated'],
+                            offset: [0, 0.4]
+                        }
+                    }),
+
+                    //Create a symbol layer using the data source and add it to the map                 
+                    symbolLayer = new atlas.layer.SymbolLayer(datasource, null, {
+                        //symbolLayer = new atlas.layer.SymbolLayer(datasource, null, {
+                        filter: ['!', ['has', 'point_count']],
+                        iconOptions: {
+                            ignorePlacement: true,
+                            allowOverlap: true,
+                            //image: 'pin-red',
+                            //image: 'dozer-icon',
+                            image: ['get', 'image'], //making the image dynamic off the value in the datasource
+                            size: 0.15,
+                            rotation: 0
+                        },
+                        //textOptions: {
+                        //    ignorePlacement: true,
+                        //    allowOverlap: true,
+                        //    textField: ['concat', ['to-string', ['get', 'name']]],
+                        //    color: '#FFFFFF',
+                        //    offset: [3, 0]
+                        //}
+                    })
+
+
+
+                ]);
+
+
+                // add Traffic    
+                map.events.add('ready', function () {
+                    //Create a traffic control to let the user easily turn the traffic on an off.
+                    map.controls.add(new atlas.control.TrafficControl(), {
+                        position: 'top-right'
+                    });
+
+                    //Add a traffic legend. It will automatically appear whenever the map is displaying traffic flow data. This can be used on its own with the map or with the traffic toggle button control like in this sample.
+                    map.controls.add(new atlas.control.TrafficLegendControl(), { position: 'bottom-left' });
+                });
+
+
+                map.layers.add(symbolLayer);
+
+
+
+
+                //Create water data source and layer
+                let waterLocations = new atlas.source.DataSource();
+                map.sources.add(waterLocations); //add water locations
+                waterLayer = new atlas.layer.PolygonLayer(waterLocations);
+                loadWaterData(waterLocations);
+
+
+
+
+
+                GetConnectionInfo().then(function (info) {
+                    console.log('GetConnectionInfo Start');
+                    let accessToken = info.accessToken
+                    const options = {
+                        accessTokenFactory: function () {
+                            if (accessToken) {
+                                const _accessToken = accessToken
+                                accessToken = null
+                                return _accessToken
+                            } else {
+                                return GetConnectionInfo().then(function (info) {
+                                    return info.accessToken
+                                })
+                            }
+                        }
+                    }
+
+                    const connection = new signalR.HubConnectionBuilder()
+                        .withUrl(info.url, options)
+                        .configureLogging(signalR.LogLevel.Information)
+                        .build();
+
+                    StartConnection(connection);
+
+                    connection.on('newVehicleData', ProcessVehicleData);
+
+                    connection.onclose(function () {
+                        console.log('disconnected')
+                        setTimeout(function () { StartConnection(connection) }, 5000)
+                    });
+                }).catch(console.error)
+
+                //Create a popup but leave it closed so we can update it and display it later.
+                popup = new atlas.Popup({
+                    position: [0, 0],
+                    pixelOffset: [0, 0]
+                });
+                //Close the popup when the mouse moves on the map.
+                map.events.add('mousemove', closePopup);
+                /**
+                 * Open the popup on mouse move or touchstart on the symbol layer.
+                 * Mouse move is used as mouseover only fires when the mouse initially goes over a symbol. 
+                 * If two symbols overlap, moving the mouse from one to the other won't trigger the event for the new shape as the mouse is still over the layer.
+                 */
+                map.events.add('mousemove', symbolLayer, symbolHovered);
+                map.events.add('touchstart', symbolLayer, symbolHovered);
+
+            });
+        }
+
+        let datasource;
+        let vehicles = [];
+
+        function ProcessVehicleData(flight) {
+            var vehicleJson = JSON.parse(flight)
+
+            if (datasource.shapesMap.has(vehicleJson.id)) {
+                var coords = [parseFloat(vehicleJson.vehicle.position.longitude), parseFloat(vehicleJson.vehicle.position.latitude)]
+                console.log('Vehicle Coordinates: ', vehicleJson.id, coords)
+                atlas.animations.setCoordinates(vehicles[vehicleJson.id], coords, { duration: 3000, autoPlay: true });
+                vehicles[vehicleJson.id].addProperty('vehicleOccupancy', vehicleJson.vehicle.occupancyStatus);
+                vehicles[vehicleJson.id].addProperty('vehicleCurrentStatus', vehicleJson.vehicle.currentStatus);
+                
+                if (vehicleJson.vehicle.occupancyStatus == 'FEW_SEATS_AVAILABLE') { vehicles[vehicleJson.id].addProperty('image', "fewseats-icon"); }
+                else if (vehicleJson.vehicle.occupancyStatus == 'STANDING_ROOM_ONLY') { vehicles[vehicleJson.id].addProperty('image', "standing-icon"); }
+                else if (vehicleJson.vehicle.occupancyStatus == 'FULL') { vehicles[vehicleJson.id].addProperty('image', "full-icon"); }
+                else { vehicles[vehicleJson.id].addProperty('image', "bus-icon"); }
+
+
+
+            } else {
+                // console.log("its not here")
+                var newVehiclePin = new atlas.Shape(new atlas.data.Point([vehicleJson.vehicle.position.longitude, vehicleJson.vehicle.position.latitude]), vehicleJson.id);
+                newVehiclePin.addProperty('vehicleOccupancy', vehicleJson.vehicle.occupancyStatus);
+                newVehiclePin.addProperty('vehicleCurrentStatus', vehicleJson.vehicle.currentStatus);
+                // check vechicleJson value of vehicle and attach a shape property to represent the shape image
+                if (vehicleJson.vehicle.occupancyStatus == 'FEW_SEATS_AVAILABLE') { newVehiclePin.addProperty('image', "fewseats-icon"); }
+                else if (vehicleJson.vehicle.occupancyStatus == 'STANDING_ROOM_ONLY') { newVehiclePin.addProperty('image', "standing-icon"); }
+                else if (vehicleJson.vehicle.occupancyStatus == 'FULL') { newVehiclePin.addProperty('image', "full-icon"); }
+                else { newVehiclePin.addProperty('image', "bus-icon"); }
+                newVehiclePin.addProperty('VehicleID', vehicleJson.id);
+                vehicles[vehicleJson.id] = newVehiclePin;
+                //datasource.add(Object.values(vehicles));
+                datasource.add(vehicles[vehicleJson.id])
+            }
+
+            //Logging:
+            //console.log(vehicleJson);
+            console.log(datasource);
+            console.log(vehicleJson.currentStatus);
+            console.log(vehicleJson);
+            console.log(newVehiclePin)
+        }
+
+
+
+        function GetConnectionInfo() {
+            return axios.get(baseurl + '/api/negotiate')
+                .then(function (response) {
+                    return response.data
+                }).catch(console.error)
+        }
+
+
+        function StartConnection(connection) {
+            console.log('connecting...')
+            connection.start()
+                .then(function () { console.log('connected!') })
+                .catch(function (err) {
+                    console.error(err)
+                    setTimeout(function () { StartConnection(connection) }, 2000)
+                })
+        }
+
+
+        function closePopup() {
+            popup.close();
+        }
+
+        function symbolHovered(e) {
+            //Make sure the event occurred on a shape feature.
+            if (e.shapes && e.shapes.length > 0) {
+                var properties = e.shapes[0].getProperties();
+
+                //Update the content and position of the popup.
+                popup.setOptions({
+                    //Create the content of the popup.
+                    content: `<div style="padding:10px;"><b>Vehicle ID:${properties.VehicleID}</b><br/>Vehicle occupancy:${properties.vehicleOccupancy}<br/>Vehicle current status:${properties.vehicleCurrentStatus}</div>`,
+                    position: e.shapes[0].getCoordinates(),
+                    pixelOffset: [0, 0]
+                });
+
+                //Open the popup.
+                popup.open(map);
+            }
+        }
+
+        function updateTileLayer() {
+            var layerName = document.getElementById("layerSelector").value;
+
+            var tileUrl = weatherTileUrl.replace('{layerName}', layerName);
+
+            if (!tileLayer) {
+                //Create a tile layer and add it to the map below the label layer.
+                tileLayer = new atlas.layer.TileLayer({
+                    visible: false,
+                    opacity: 0.9,
+                    tileSize: 256
+                });
+
+                map.layers.add(tileLayer, 'labels');
+            }
+            else if (layerName == 'Off') {
+                tileLayer.setOptions({
+                    visible: false
+                })
+                console.log('Turn Weather Off');
+            }
+            else {
+                tileLayer.setOptions({
+                    tileUrl: tileUrl,
+                    visible: true
+                });
+            }
+        }
+
+        // load water body data
+        function loadWaterData(datasource) {
+            fetch('https://franmer-logisitcwebapp.azurewebsites.net/data/waterbodies.json').then(response => response.json()).then(body => {
+                datasource.add(body)
+            })
+        }
+
+        function showWater(wateroption) {
+            if (wateroption == 'on') {
+                map.layers.add([waterLayer]);
+                console.log('Turn Water On');
+            }
+            else {
+                map.layers.remove([waterLayer])  //remove the water layer   
+                console.log('Turn Water Off');
+            }
+        }
+    </script>
+
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        #myMap {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body onload="GetMap()">
+    <div id="myMap"></div>
+
+
+
+    <div style="position:absolute;top:10px;left:10px;padding:10px;background-color:white;border-radius:10px;">
+        Select weather overlay (franmer8):
+        <select id="layerSelector" onchange="updateTileLayer()">
+            <option value="microsoft.weather.radar.main">Radar</option>
+            <option value="microsoft.weather.infrared.main">Infrared</option>
+            <option value="Off" selected="selected">Off</option>
+        </select>
+
+        <br /><br />
+
+        <!-- <input type="button" value="Water Hazards On" onclick="showWater('on');" />
+        <input type="button" value="Water Hazards Off" onclick="showWater('off');" /> -->
+    </div>
+
+</body>
+
+</html>
