@@ -99,9 +99,27 @@ Vous devez alors voir les appareils présents dans votre IoT Hub. Cliquez sur un
 
 Dans la section "Connection string with SAS token". choisissez "Primary key", définisez le nombre de minutes avec l'expiration du jeton puis cliquez sur "Generate".
 
-Copiez la clef ainsi genérée puis collez-là. Nous allons en avoir besoin plus tard.
+Vous allez obtenir un jeton ressemblant à celui ci-dessous :
+
+*HostName=IoTHub-Logictic-AEffacer.azure-devices.net;DeviceId=FranmerBuses;SharedAccessSignature=SharedAccessSignature sr=IoTHub-Logictic-AEffacer.azure-devices.net%2Fdevices%2FFranmerBuses&sig=Qq0GFga6kzgwHp0DldvpJbR1mwAwXMOAm6Lmc9UFBhQ%3D&se=2392799555*
+
+
+Conservez uniquement la portion commençant par "*SharedAccessSignature sr=*" comme illustré ci-dessous :
+
+*SharedAccessSignature sr=IoTHub-Logictic-AEffacer.azure-devices.net%2Fdevices%2FFranmerBuses&sig=Qq0GFga6kzgwHp0DldvpJbR1mwAwXMOAm6Lmc9UFBhQ%3D&se=2392799555*
+
+
+
+Copiez la portion ainsi genérée puis collez-là. Nous allons en avoir besoin plus tard.
 
 ![IoTHub](pictures/014.png)
 
+## Envoyer des évènements à Azure IoT Hub
 
+Depuis Visual Studio code, ouvrez le fichier "*SendVehicleEvent.py*" puis renseignez les champs requis.
 
+![IoTHub](pictures/015.png)
+
+Pour la valeur "*YOUR FILE PATH*", allez dans le "*data*", puis faîtes un clique droit sur le fichier "BusPositionV2.csv" et cliquez sur "*Copy Path*" :
+
+![IoTHub](pictures/016.png)
