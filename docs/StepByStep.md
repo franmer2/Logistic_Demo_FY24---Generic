@@ -70,14 +70,38 @@ Copiez la chaîne de connection "*Event Hub-compatible endpoint*" et conservez l
 ![IoTHub](pictures/009.png)
 
 
+
 ## Creation d'un "SAS TOKEN"
 
-Pour la création du jeton de connection, nous allons utiliser [IoT Explorer](https://github.com/Azure/azure-iot-explorer/releases)
+
 
 Pour se connecter à notre IoT Hub avec IoT Explorer nous avons besoin d'une chaîne de connexion.
 
-Sur la gauche cliquez sur "S*hared access policies*", "*iothubowner*", puis copiez une des chaînes de connexion
+Sur la gauche cliquez sur "*Shared access policies*", "*iothubowner*", puis copiez une des chaînes de connexion.
 
 
 ![IoTHub](pictures/010.png)
+
+
+Pour la création du jeton de connection, nous allons utiliser [IoT Explorer](https://github.com/Azure/azure-iot-explorer/releases).
+
+Exécutez IoT Explorer et cliquez sur "Add connection" :
+
+![IoTHub](pictures/011.png)
+
+Collez la chaîne de connexion puis cliquez sur "Save"
+
+![IoTHub](pictures/012.png)
+
+Vous devez alors voir les appareils présents dans votre IoT Hub. Cliquez sur un des appareils :
+
+![IoTHub](pictures/013.png)
+
+Dans la section "Connection string with SAS token". choisissez "Primary key", définisez le nombre de minutes avec l'expiration du jeton puis cliquez sur "Generate".
+
+Copiez la clef ainsi genérée puis collez-là, nous allons en avoir besoin plus tard.
+
+![IoTHub](pictures/014.png)
+
+
 
