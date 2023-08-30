@@ -99,7 +99,7 @@ Vous devez alors voir les appareils présents dans votre IoT Hub. Cliquez sur un
 
 Dans la section "Connection string with SAS token". choisissez "Primary key", définisez le nombre de minutes avec l'expiration du jeton puis cliquez sur "Generate".
 
-Copiez la clef ainsi genérée puis collez-là, nous allons en avoir besoin plus tard.
+Copiez la clef ainsi genérée puis collez-là. Nous allons en avoir besoin plus tard.
 
 ![IoTHub](pictures/014.png)
 
