@@ -29,3 +29,55 @@ Renseignez les informations. Le tier basic sera suffisant ici. Il pourra cependa
 Cliquez sur "*Review + Create*" puis validez la création du service :
 
 ![IoTHub](pictures/002.png)
+
+Une fois le service créé, rendez-vous sur sa page "*Overview*" et mettez tout de suite à jour le certificat. Cliquez sur le lien "*What do I need to do?*" :
+
+![IoTHub](pictures/003.png)
+
+CLiquez sur le bouton "*Migrate to DigiCert Global G2*" :
+
+![IoTHub](pictures/004.png)
+
+Puis cochez les 4 cases avant de cliquez sur le bouton "Update" :
+
+![IoTHub](pictures/005.png).
+
+## Creation d'un appareil
+
+Au niveau de votre service Azure IoT Hub, sur la gauche, cliquez sur "*Devices*" puis sur "*Add Device*"
+
+![IoTHub](pictures/006.png)
+
+Donnez un nom à l áppareil, choisissez "*Symetric key*", cochez la case "*Auto-generate keys*" et vérifiez que l'option "*Enable*" est bien sélectionnée.
+
+Cliquez sur "*Save*"
+
+![IoTHub](pictures/007.png)
+
+Cliquez sur "*Refresh*" pour voir votre appareil dans la liste
+
+
+![IoTHub](pictures/008.png)
+
+## Création des groupes de consommateurs
+
+Les groupes de consommateurs sont une vue d’État du hub. Ils permettent à plusieurs applications consommatrices d’avoir chacune leur propre vue du flux d’événements et de lire le flux indépendamment. Cela signifie que lorsqu’une application cesse de lire à partir d’un flux d’événements, elle peut continuer là où elle s’est arrêté. Il est préférable pour chaque application d’avoir son propre groupe de consommateurs.
+
+Sur la gauche, cliquez sur "Built-in endpoints", puis créez vos groupes de consommateurs.
+
+Copiez la chaîne de connection "*Event Hub-compatible endpoint*" et conservez là dans un tableau. On s'en servira un peu plus tard.
+
+![IoTHub](pictures/009.png)
+
+
+## Creation d'un "SAS TOKEN"
+
+Pour la création du jeton de connection, nous allons utiliser [IoT Explorer](https://github.com/Azure/azure-iot-explorer/releases)
+
+Pour se connecter à notre IoT Hub avec IoT Explorer nous avons besoin d'une chaîne de connexion.
+
+Sur la gauche cliquez sur "S*hared access policies*", "*iothubowner*", puis copiez une des chaînes de connexion
+
+
+![IoTHub](pictures/010.png)
+
