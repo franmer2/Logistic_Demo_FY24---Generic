@@ -4,6 +4,10 @@ Dans cet article, je vais vous présenter les étapes pour mettre en place, de b
 
 ![Architecture](pictures/000.png)
 
+Après avoir suivi cet article, vous aurez une solution complète comme illustré dans le gif animé ci-dessous :
+
+![Solution](pictures/Bus4GifAnime.gif)
+
 ## Prérequis
 
 - Une [souscription](https://azure.microsoft.com/en-ca/free/) Azure
@@ -293,6 +297,9 @@ Azure Maps est une collection de services géospatiaux et de kits de développem
 - Intelligence géographique via l’analytique géospatiale.
 
 
+La solution Azure Maps présentée ici inclus le clustering et les pop-up dynamiques.
+
+
 #### Déploiement d'Azure Maps
 
 Depuis le portail Azure, créez une nouvelle ressource et cherchez Azure Maps. Cliquez sur "*Create*" :
@@ -346,7 +353,7 @@ Au niveau de votre "Function App", cliquez sur "*CORS*" ("Cross-Origin Resource 
 
 ![Solution](pictures/049.png)
 
-#### Déploiement de l'application web
+#### Modification du code de l'application web
 
 Depuis Visual Studio Code, vérifiez que vous avez bien le compléments "Azure App Service" :
 
@@ -374,3 +381,58 @@ Pour les fonctionnalités :
 ![Solution](pictures/054.png)
 
 
+#### déploiement de l'application web
+
+Depuis visual studio, Dans la partie Azure, vérifiez que vous avez bien accès à votre Application Web.
+
+![Solution](pictures/055.png)
+
+Faites un clic-droit sur votre application web et cliquez sur "*Deploy to Web App...*" :
+
+![Solution](pictures/056.png)
+
+La palette de commandes va s'ouvrir en haut de l'écran. Cliquez sur "Browse..." pour sélectionner le dossier que vous souhaitez déployer :
+
+![Solution](pictures/057.png)
+
+Dans notre cas nous allons déployer le dossier "*Web*". **Double-cliquez** sur le dossier "*Web*" et cliquez sur "*Select*" :
+
+![Solution](pictures/058.png)
+
+Cliquez sur "Deploy" :
+
+![Solution](pictures/059.png)
+
+Si tout se passe bien, vous devriez avoir le message ci-dessous en bas à droite de votre écran. Cliquez sur "*Browse Website*" :
+
+![Solution](pictures/060.png)
+
+Vous devez avoir un nouvel onglet qui s'ouvre dans votre navigateur web affichant une carte centrée sur Montréal :
+
+![Solution](pictures/061.png)
+
+#### Suivre les bus en temps réels
+
+Nous allons mainenant envoyer des évènements à IoT Hub pour les afficher en presque temps réel sur notre carte Azure Maps.
+
+Dans l'explorateur de fichiers de Visual Studio Code, cliquez sur "*SendVehicleEvents.py*" qui se trouve dans le dossier "*producer*". Ckiquez sur le bouton "*play*" qui se trouve en haut à droite de l'écran :
+
+![Solution](pictures/062.png)
+
+Vous devriez voir les évènements s'afficher dans la console :
+
+![Solution](pictures/063.png)
+
+Vous devriez voir les bus commencer à bouger sur la carte :
+
+![Solution](pictures/064.png)
+
+Ci-dessous un petit Gif animé pour illustrer la solution avec le clustering, la gestion des couleurs en fonction des évènements et les pop-ups dynamiques :
+
+![Solution](pictures/Bus4GifAnime.gif)
+
+## Comment débugguer
+
+Après avoir publié votre page web, dans votre nagigateur web, appuyez sur la touche F12 et analysez les erreurs retournées.
+
+Ci-dessous un exemple des erreurs communes avec une mauvaise référence des images et une mauvaise configuration des "applications settions" au niveau d'Azure "*Function App*"
