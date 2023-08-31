@@ -326,3 +326,14 @@ Renseignez les informations nécessaires. Pour les champs suivants, définissez 
 Clicquez sur "Review + Create" et validez la création du service :
 
 ![WebApp](pictures/046.png)
+
+Une fois le service déployé, allez sur la page "Overview" de votre service Azure Web App et copiez la valeur "D*efault Domain*". Copiez cette valeur dans un fichier, nous en auront besoin un peu plus tard :
+
+![WebApp](pictures/047.png)
+
+### Déploiement de l'application web
+
+Une fois tous les services Azure déployés, vous devriez avoir les services suivants dans votre groupe de ressources :
+
+
+![Solution](pictures/048.png)
