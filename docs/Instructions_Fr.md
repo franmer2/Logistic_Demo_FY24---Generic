@@ -114,7 +114,7 @@ Vous allez obtenir un jeton ressemblant à celui ci-dessous :
 
 
 
-Copiez la portion ainsi générée puis collez-là. Nous allons en avoir besoin plus tard.
+Copiez la portion ainsi générée puis collez-là. Nous allons en avoir besoin plus tard. (Vous pouvez utiliser le fichier [Table.md]() pour noter les valeurs requises)
 
 ![IoTHub](pictures/014.png)
 
