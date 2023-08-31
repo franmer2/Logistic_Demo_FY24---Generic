@@ -435,4 +435,6 @@ Ci-dessous un petit Gif animé pour illustrer la solution avec le clustering, la
 
 Après avoir publié votre page web, dans votre nagigateur web, appuyez sur la touche F12 et analysez les erreurs retournées.
 
-Ci-dessous un exemple des erreurs communes avec une mauvaise référence des images et une mauvaise configuration des "applications settions" au niveau d'Azure "*Function App*"
+Ci-dessous un exemple des erreurs communes avec une mauvaise référence des images et une mauvaise configuration des "applications settions" au niveau d'Azure "*Function App*" :
+
+![Solution](pictures/065.png)
