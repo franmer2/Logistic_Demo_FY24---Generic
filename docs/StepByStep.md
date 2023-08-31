@@ -6,7 +6,7 @@ Dans cet article, je vais vous présenter les étapes pour mettre en place, de b
 
 Après avoir suivi cet article, vous aurez une solution complète comme illustré dans le gif animé ci-dessous :
 
-![Solution](pictures/Bus4GifAnime.gif)
+![Solution](pictures/Bus4GifAnime2.gif)
 
 ## Prérequis
 
