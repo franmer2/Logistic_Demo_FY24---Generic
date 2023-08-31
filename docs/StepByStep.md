@@ -174,11 +174,11 @@ Le service Azure SignalR simplifie le processus d’ajout de fonctionnalités we
 
 Depuis le portail Azure, cliquez sur "*Create a resource*"
 
-![IoTHub](pictures/023.png)
+![SignalR](pictures/023.png)
 
 Puis recherchez le service SignalR
 
-![IoTHub](pictures/024.png)
+![SignalR](pictures/024.png)
 
 Renseignez les informations pour créer votre service. Choisissez le groupe de ressources dans lequel vous souhaitez déployer le service.
 Pour faire des essais, vous pouvez choisir le tier "*Free*".
@@ -187,16 +187,21 @@ Choisissez "***Serverless***" pour le mode de service.
 
 Cliquez sur "*Review + create*"
 
-![IoTHub](pictures/025.png)
+![SignalR](pictures/025.png)
 
 
 Validez la création du service en cliquant sur le bouton "*Create*"
 
-![IoTHub](pictures/026.png)
+![SignalR](pictures/026.png)
 
 Vous devriez maintenant avoir 2 services dans votre groupe de ressources :
 
-![IoTHub](pictures/027.png)
+![SignalR](pictures/027.png)
+
+Cliquez sur votre service SignalR, puis sur "*Connection strings*" pour récupérer la chaîne de connexion. Copiez là et collez là dans un fichier. On en aura besoin un peu plus tard.
+
+![SignalR](pictures/SignalR_928.png)
+
 
 ### Azure Function
 
@@ -205,3 +210,29 @@ Nous allons maintenant créer une "*Azure Function App*" pour récupérer les é
 Depuis le portail Azure, creez une nouvelle ressource et cherchez "*Function App*" :
 
 ![IoTHub](pictures/028.png)
+
+Définissez les options comme illustré sur la copie d'écran ci-dessous et cliquez sur "*Review + create*", puis validez la création de la "*Function App*" :
+
+![IoTHub](pictures/029.png)
+
+Depuis le portail Azure, allez dans votre groupe de ressources et cliquez sur la "*Function App*" nouvellement déployée :
+
+![IoTHub](pictures/030.png)
+
+Puis cliquez sur "Configuration. Dans "application settings" cliquez sur "New Application setting"
+
+![IoTHub](pictures/031.png)
+
+Rajoutez les valeurs :
+
+- AzureIOTHubConnectionString
+- AzureSignalRConnectionString
+
+
+Pour la valeur "AzureIOTHubConnectionString" renseignez la valeur de la chaîne de connection pour IoT Hub (Event Hub-compatible endpoint):
+
+
+![IoTHub](pictures/032.png)
+
+Pour la valeur "AzureSignalRConnectionString" 
+
