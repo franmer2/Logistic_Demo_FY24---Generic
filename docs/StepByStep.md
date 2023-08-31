@@ -331,7 +331,7 @@ Une fois le service déployé, allez sur la page "Overview" de votre service Azu
 
 ![WebApp](pictures/047.png)
 
-### Déploiement de l'application web
+### Déploiement
 
 Une fois tous les services Azure déployés, vous devriez avoir les services suivants dans votre groupe de ressources :
 
@@ -345,3 +345,32 @@ Afin de permettre au Service Azure Maps de communiquer avec les fonctions Azure,
 Au niveau de votre "Function App", cliquez sur "*CORS*" ("Cross-Origin Resource Sharing") et rajoutez l'URL de votre application web que vous avez copiez précédement :
 
 ![Solution](pictures/049.png)
+
+#### Déploiement de l'application web
+
+Depuis Visual Studio Code, vérifiez que vous avez bien le compléments "Azure App Service" :
+
+![Solution](pictures/050.png)
+
+Revenez dans la partie "*Explorer*" de Visual Studio Code, dans le dossier "*Web*" cliquez sur le fichier "*Index.html*". Remplacez les valeurs suivantes :
+
+- baseurl (l'url de votre Azure Function App)
+- subscriptionKey (la clef de votre service Azure Maps)
+
+![Solution](pictures/051.png)
+
+Par exemple vous devriez obtenir quelque chose comme ci-dessous après modifications :
+
+![Solution](pictures/052.png)
+
+De plus, changer les reférences, avec l'url de votre application web, vers les images ou les services, là où c'est approprié, comme illustré ci-dessous :
+
+Pour les images :
+
+![Solution](pictures/053.png)
+
+Pour les fonctionnalités :
+
+![Solution](pictures/054.png)
+
+
