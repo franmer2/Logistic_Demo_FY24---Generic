@@ -102,7 +102,7 @@ You'll get a token similar to the one below:
 *SharedAccessSignature sr=IoTHub-Logictic-AEffacer.azure-devices.net%2Fdevices%2FFranmerBuses&sig=Qq0GFga6kzgwHp0DldvpJbR1mwAwXMOAm6Lmc9UFBhQ%3D&se=2392799555*
 
 
-Copy the generated portion and paste it. We're going to need it later.
+Copy the generated portion and paste it. We're going to need it later (You can use [Table.md](https://github.com/franmer2/Logistic_Demo_FY24---Generic/blob/main/docs/Table.md) to keep all your needed values).
 
 ![IoTHub](pictures/014.png)
 
