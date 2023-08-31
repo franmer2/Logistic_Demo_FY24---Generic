@@ -108,7 +108,7 @@ Vous allez obtenir un jeton ressemblant à celui ci-dessous :
 *HostName=IoTHub-Logictic-AEffacer.azure-devices.net;DeviceId=FranmerBuses;SharedAccessSignature=SharedAccessSignature sr=IoTHub-Logictic-AEffacer.azure-devices.net%2Fdevices%2FFranmerBuses&sig=Qq0GFga6kzgwHp0DldvpJbR1mwAwXMOAm6Lmc9UFBhQ%3D&se=2392799555*
 
 
-Conservez uniquement la portion commençant par "*SharedAccessSignature sr=*" comme illustré ci-dessous :
+**Conservez uniquement la portion commençant par "*SharedAccessSignature sr=*" comme illustré ci-dessous :**
 
 *SharedAccessSignature sr=IoTHub-Logictic-AEffacer.azure-devices.net%2Fdevices%2FFranmerBuses&sig=Qq0GFga6kzgwHp0DldvpJbR1mwAwXMOAm6Lmc9UFBhQ%3D&se=2392799555*
 
