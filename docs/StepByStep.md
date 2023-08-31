@@ -180,4 +180,16 @@ Puis recherchez le service SignalR
 
 ![IoTHub](pictures/024.png)
 
+Renseignez les informations pour créer votre service. Choisissez le groupe de ressources dans lequel vous souhaitez déployer le service.
+Pour faire des essais, vous pouvez choisir le tier "*Free*".
 
+Choisissez "***Serverless***" pour le mode de service.
+
+Cliquez sur "*Review + create*"
+
+![IoTHub](pictures/025.png)
+
+
+Validez la création du service en cliquant sur le bouton "*Create*"
+
+![IoTHub](pictures/026.png)
