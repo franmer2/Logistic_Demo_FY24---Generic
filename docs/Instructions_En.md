@@ -41,7 +41,7 @@ Click on the "*Migrate to DigiCert Global G2*" button:
 
 Then check the 4 boxes before clicking on the "*Update*" button:
 
-! [IoTHub](pictures/005.png).
+![IoTHub](pictures/005.png).
 
 #### Creating a device
 
