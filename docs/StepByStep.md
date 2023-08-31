@@ -269,3 +269,26 @@ Validez la mise à jour :
 Si tout se pasde bien, vous devriez obtenir ce message à la fin du déploiment :
 
 ![Function](pictures/040.png)
+
+Et vous deviez voir vos 2 fonctions déployées dans Azure :
+
+![Function](pictures/041.png)
+
+
+## Servir et présenter
+
+Maintenant nous allons déployer les services pour servir et présenter les informations
+
+### Azure Maps
+
+Azure Maps est une collection de services géospatiaux et de kits de développement logiciel (SDK) qui utilisent des données cartographiques actualisées pour fournir un contexte géographique précis à des applications web et mobiles. Azure Maps fournit les services suivants :
+
+- API REST pour assurer le rendu de cartes vectorielles et raster dans plusieurs styles et une imagerie satellitaire.
+- Services de créateur pour créer et afficher des cartes basées sur des données de carte d’intérieur privées.
+- Services Search pour localiser les adresses, les lieux et les points d’intérêt dans le monde entier.
+- Diverses options de routage : point à point, multipoint, optimisation multipoint, isochrone, véhicule électrique, véhicule commercial, trafic influencé et routage par matrice.
+- Vue du flux de trafic et vue des incidents pour les applications qui ont besoin d’informations de trafic en temps réel.
+- Services de fuseau horaire (Time zone) et de géolocalisation (Geolocation).
+- Services de geofencing et stockage des données cartographiques, avec les informations d’emplacement hébergées dans Azure.
+- Intelligence géographique via l’analytique géospatiale.
+
