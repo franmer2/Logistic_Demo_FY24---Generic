@@ -193,3 +193,15 @@ Cliquez sur "*Review + create*"
 Validez la création du service en cliquant sur le bouton "*Create*"
 
 ![IoTHub](pictures/026.png)
+
+Vous devriez maintenant avoir 2 services dans votre groupe de ressources :
+
+![IoTHub](pictures/027.png)
+
+### Azure Function
+
+Nous allons maintenant créer une "*Azure Function App*" pour récupérer les évènements d'Azure IoT hub et assurer la communication en temps réel avec Azure Maps (que l'on déploira un peu plus tard)
+
+Depuis le portail Azure, creez une nouvelle ressource et cherchez "*Function App*" :
+
+![IoTHub](pictures/028.png)
