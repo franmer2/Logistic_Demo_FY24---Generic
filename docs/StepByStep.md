@@ -292,3 +292,37 @@ Azure Maps est une collection de services géospatiaux et de kits de développem
 - Services de geofencing et stockage des données cartographiques, avec les informations d’emplacement hébergées dans Azure.
 - Intelligence géographique via l’analytique géospatiale.
 
+
+#### Déploiement d'Azure Maps
+
+Depuis le portail Azure, créez une nouvelle ressource et cherchez Azure Maps. Cliquez sur "*Create*" :
+
+![Maps](pictures/042.png)
+
+Renseignez les informations nécessaires. Pour le niveau de prix, choisissez "*Gen2 (Maps and Location Insights)*" : 
+
+![Maps](pictures/043.png)
+
+Une fois le service déployé, depuis le portail Azure, cliquez sur votre service Azure Maps, puis cliquez sur "*Authentication*". Copiez la clef primaire du service et copiez là dans un fichier. On en aura besoin un peu plus tard :
+
+![Maps](pictures/044.png)
+
+### Azure Web App
+
+Azure App Service est un service HTTP pour l’hébergement d’applications web, d’API REST et de backends mobiles. Vous pouvez développer dans votre langage de prédilection, à savoir .NET, .NET Core, Java, Node.js, PHP et Python. Les applications s’exécutent et sont mises à l’échelle facilement dans les environnements Windows et Linux.
+
+#### Déploiement Azure Web App
+
+Depuis le portail Azure, créez une nouvelle ressource et charchez pour Azure Web App :
+
+![WebApp](pictures/045.png)
+
+Renseignez les informations nécessaires :
+
+- Publish : "Code"
+- Runtime stack : "PHP 8.2"
+- Pricing plan : "Free"
+
+Clicquez sur "Review + Create" et validez la création du service :
+
+![WebApp](pictures/046.png)
