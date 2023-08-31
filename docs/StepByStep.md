@@ -241,3 +241,31 @@ Pour la valeur "*AzureSignalRConnectionString*" renseignez la chaîne de connexi
 N'oubliez pas de sauvegarder vos modifications en cliquant sur le bouton "*Save*" :
 
 ![Function](pictures/034.png)
+
+#### Deploiement du code
+
+Nous allons déployer le code des fonctions depuis Visual Studio Code. Avant toute chose, vérifiez que vous êtes bien connectez à Azure :
+
+![Function](pictures/035.png)
+
+Une fois connecté, vous devriez voir vos ressources Azure:
+
+![Function](pictures/036.png)
+
+le code se trouve dans le dossier "Functions". C'est le fichier "FranmerRealTimeLogistic.cs". Cliquez sur le fichier, puis depuis la palette de commandes (Ctrl + Shift + P), sélectionnez "*Azure Functions: Deploy to Function App...*" 
+
+![Function](pictures/037.png)
+
+
+Puis sélectionnez votre "*Function App*" :
+
+
+![Function](pictures/038.png)
+
+Validez la mise à jour :
+
+![Function](pictures/039.png)
+
+Si tout se pasde bien, vous devriez obtenir ce message à la fin du déploiment :
+
+![Function](pictures/040.png)
