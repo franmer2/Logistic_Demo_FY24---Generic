@@ -209,19 +209,19 @@ Nous allons maintenant créer une "*Azure Function App*" pour récupérer les é
 
 Depuis le portail Azure, creez une nouvelle ressource et cherchez "*Function App*" :
 
-![IoTHub](pictures/028.png)
+![Function](pictures/028.png)
 
 Définissez les options comme illustré sur la copie d'écran ci-dessous et cliquez sur "*Review + create*", puis validez la création de la "*Function App*" :
 
-![IoTHub](pictures/029.png)
+![Function](pictures/029.png)
 
 Depuis le portail Azure, allez dans votre groupe de ressources et cliquez sur la "*Function App*" nouvellement déployée :
 
-![IoTHub](pictures/030.png)
+![Function](pictures/030.png)
 
 Puis cliquez sur "Configuration. Dans "application settings" cliquez sur "New Application setting"
 
-![IoTHub](pictures/031.png)
+![Function](pictures/031.png)
 
 Rajoutez les valeurs :
 
@@ -229,10 +229,15 @@ Rajoutez les valeurs :
 - AzureSignalRConnectionString
 
 
-Pour la valeur "AzureIOTHubConnectionString" renseignez la valeur de la chaîne de connection pour IoT Hub (Event Hub-compatible endpoint):
+Pour la valeur "*AzureIOTHubConnectionString*" renseignez la valeur de la chaîne de connection pour IoT Hub (Event Hub-compatible endpoint) :
 
 
-![IoTHub](pictures/032.png)
+![Function](pictures/032.png)
 
-Pour la valeur "AzureSignalRConnectionString" 
+Pour la valeur "*AzureSignalRConnectionString*" renseignez la chaîne de connexion du service SignalR : 
 
+![Function](pictures/033.png)
+
+N'oubliez pas de sauvegarder vos modifications en cliquant sur le bouton "*Save*" :
+
+![Function](pictures/034.png)
