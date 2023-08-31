@@ -67,7 +67,7 @@ On the left, click on "Built-in endpoints", then create your consumer groups.
 
 Copy the connection string "*Event Hub-compatible endpoint*" and keep it in an array. It will be used a little later.
 
-! [IoTHub] (pictures/009.png)
+![IoTHub](pictures/009.png)
 
 #### Creating a "*SAS TOKEN*"
 
