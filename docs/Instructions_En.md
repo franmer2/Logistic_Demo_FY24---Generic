@@ -359,60 +359,60 @@ For features:
 
 
 
-#### déploiement de l'application web
+#### Web Application Deployment
 
-Depuis Visual Studio Code, dans la partie Azure, vérifiez que vous avez bien accès à votre application web.
+From Visual Studio Code, in the Azure part, verify that you have access to your web application.
 
 ![Solution](pictures/055.png)
 
-Faites un clic-droit sur votre application web et cliquez sur "*Deploy to Web App...*" :
+Right-click on your web application and click on "*Deploy to Web App... *" :
 
 ![Solution](pictures/056.png)
 
-La palette de commandes va s'ouvrir en haut de l'écran. Cliquez sur "*Browse...*" pour sélectionner le dossier que vous souhaitez déployer :
+The command palette will open at the top of the screen. Click "*Browse...*" to select the folder you want to deploy:
 
 ![Solution](pictures/057.png)
 
-Dans notre cas nous allons déployer le dossier "*Web*". **Double-cliquez** sur le dossier "*Web*" et cliquez sur "*Select*" :
+In our case we will deploy the "*Web*" folder. **Double-click** on the "*Web*" folder and click "*Select*":
 
 ![Solution](pictures/058.png)
 
-Cliquez sur "*Deploy*" :
+Click on "*Deploy*":
 
 ![Solution](pictures/059.png)
 
-Si tout se passe bien, vous devriez avoir le message ci-dessous en bas à droite de votre écran. Cliquez sur "*Browse Website*" :
+If all goes well, you should have the message below at the bottom right of your screen. Click on "*Browse Website*":
 
 ![Solution](pictures/060.png)
 
-Vous devez avoir un nouvel onglet qui s'ouvre dans votre navigateur web affichant une carte centrée sur Montréal :
+You should have a new tab opening in your web browser displaying a map focused on Montreal:
 
 ![Solution](pictures/061.png)
 
-#### Suivre les bus en temps réels
+#### Follow buses in real time
 
-Nous allons maintenant envoyer des évènements à IoT Hub pour les afficher en presque temps réel sur notre carte Azure Maps.
+We will now send events to IoT Hub to display them in near real-time on our Azure Maps.
 
-Dans l'explorateur de fichiers de Visual Studio Code, cliquez sur "*SendVehicleEvents.py*" qui se trouve dans le dossier "*producer*". Cliquez sur le bouton "*play*" qui se trouve en haut à droite de l'écran :
+In the Visual Studio Code File Explorer, click "*SendVehicleEvents.py*" which is located in the "*producer*" folder. Click on the "*play*" button at the top right of the screen:
 
 ![Solution](pictures/062.png)
 
-Vous devriez voir les évènements s'afficher dans la console :
+You should see events in the console:
 
 ![Solution](pictures/063.png)
 
-Vous devriez voir les bus commencer à bouger sur la carte :
+You should see the buses start moving on the map:
 
 ![Solution](pictures/064.png)
 
-Ci-dessous un petit Gif animé pour illustrer la solution avec le clustering, la gestion des couleurs en fonction des évènements et les pop-ups dynamiques :
+Below is a small animated Gif to illustrate the solution with clustering, event-based color management and dynamic pop-ups:
 
 ![Solution](pictures/Bus4GifAnime.gif)
 
-## Comment débugguer
+## How to debug
 
-Après avoir publié votre page web, dans votre navigateur web, appuyez sur la touche **F12** et analysez les erreurs retournées.
+After publishing your web page, in your web browser, press the **F12** key and scan for returned errors.
 
-Ci-dessous un exemple des erreurs communes avec une mauvaise référence des images et une mauvaise configuration des "*applications settings*" au niveau d'Azure "*Function App*" :
+Below is an example of common errors with poor image reference and misconfiguration of "*applications settings*" at the Azure "*Function App*" level:
 
 ![Solution](pictures/065.png)
