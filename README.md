@@ -1,7 +1,7 @@
 # Instructions
 
-Version Française [ici](C:\Temp\Logistic_Demo_FY24 - Generic\docs\Instructions_Fr.md)
+Version Française [ici](https://github.com/franmer2/Logistic_Demo_FY24---Generic/blob/main/docs/Instructions_Fr.md)
 
-English version [here](C:\Temp\Logistic_Demo_FY24 - Generic\docs\Instructions_En.md)
+English version [here](https://github.com/franmer2/Logistic_Demo_FY24---Generic/blob/main/docs/Instructions_En.md)
 
 ![Solution](pictures/../docs/pictures/Bus4GifAnime2.gif)
