@@ -1,6 +1,6 @@
-# Suivi logistic en temps réel
+# Suivi logistique en temps réel
 
-Dans cet article, je vais vous présenter les étapes pour mettre en place, de bout en bout, une solution de suivie d'une flotte de véhicules en temps réel. 
+Dans cet article, je vais vous présenter les étapes pour mettre en place, de bout en bout, une solution de suivi d'une flotte de véhicules en temps réel. 
 
 ![Architecture](pictures/000.png)
 
@@ -42,7 +42,7 @@ CLiquez sur le bouton "*Migrate to DigiCert Global G2*" :
 
 ![IoTHub](pictures/004.png)
 
-Puis cochez les 4 cases avant de cliquez sur le bouton "Update" :
+Puis cochez les 4 cases avant de cliquer sur le bouton "*Update*" :
 
 ![IoTHub](pictures/005.png).
 
@@ -52,7 +52,7 @@ Au niveau de votre service Azure IoT Hub, sur la gauche, cliquez sur "*Devices*"
 
 ![IoTHub](pictures/006.png)
 
-Donnez un nom à l áppareil, choisissez "*Symetric key*", cochez la case "*Auto-generate keys*" et vérifiez que l'option "*Enable*" est bien sélectionnée.
+Donnez un nom à l'appareil, choisissez "*Symetric key*", cochez la case "*Auto-generate keys*" et vérifiez que l'option "*Enable*" est bien sélectionnée.
 
 Cliquez sur "*Save*"
 
@@ -65,11 +65,11 @@ Cliquez sur "*Refresh*" pour voir votre appareil dans la liste
 
 #### Création des groupes de consommateurs
 
-Les groupes de consommateurs sont une vue d’État du hub. Ils permettent à plusieurs applications consommatrices d’avoir chacune leur propre vue du flux d’événements et de lire le flux indépendamment. Cela signifie que lorsqu’une application cesse de lire à partir d’un flux d’événements, elle peut continuer là où elle s’est arrêté. Il est préférable pour chaque application d’avoir son propre groupe de consommateurs.
+Les groupes de consommateurs sont une vue d’État du hub. Ils permettent à plusieurs applications consommatrices d’avoir chacune leur propre vue du flux d’événements et de lire le flux indépendamment. Cela signifie que lorsqu’une application cesse de lire à partir d’un flux d’événements, elle peut continuer là où elle s’est arrêtée. Il est préférable pour chaque application d’avoir son propre groupe de consommateurs.
 
 Sur la gauche, cliquez sur "Built-in endpoints", puis créez vos groupes de consommateurs.
 
-Copiez la chaîne de connection "*Event Hub-compatible endpoint*" et conservez là dans un tableau. On s'en servira un peu plus tard.
+Copiez la chaîne de connexion "*Event Hub-compatible endpoint*" et conservez là dans un tableau. On s'en servira un peu plus tard.
 
 ![IoTHub](pictures/009.png)
 
@@ -87,9 +87,9 @@ Sur la gauche cliquez sur "*Shared access policies*", "*iothubowner*", puis copi
 ![IoTHub](pictures/010.png)
 
 
-Pour la création du jeton de connection, nous allons utiliser [IoT Explorer](https://github.com/Azure/azure-iot-explorer/releases).
+Pour la création du jeton de connexion, nous allons utiliser [IoT Explorer](https://github.com/Azure/azure-iot-explorer/releases).
 
-Exécutez IoT Explorer et cliquez sur "Add connection" :
+Exécutez IoT Explorer et cliquez sur "*Add connection*" :
 
 ![IoTHub](pictures/011.png)
 
@@ -101,7 +101,7 @@ Vous devez alors voir les appareils présents dans votre IoT Hub. Cliquez sur un
 
 ![IoTHub](pictures/013.png)
 
-Dans la section "Connection string with SAS token". choisissez "Primary key", définisez le nombre de minutes avec l'expiration du jeton puis cliquez sur "Generate".
+Dans la section "*Connection string with SAS token*". choisissez "*Primary key*", définisez le nombre de minutes (525 600 minutes = 1 an) avec l'expiration du jeton puis cliquez sur "*Generate*".
 
 Vous allez obtenir un jeton ressemblant à celui ci-dessous :
 
