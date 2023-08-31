@@ -46,7 +46,7 @@ Puis cochez les 4 cases avant de cliquer sur le bouton "*Update*" :
 
 ![IoTHub](pictures/005.png).
 
-#### Creation d'un appareil
+#### Création d'un appareil
 
 Au niveau de votre service Azure IoT Hub, sur la gauche, cliquez sur "*Devices*" puis sur "*Add Device*"
 
@@ -75,7 +75,7 @@ Copiez la chaîne de connexion "*Event Hub-compatible endpoint*" et conservez l�
 
 
 
-#### Creation d'un "SAS TOKEN"
+#### Création d'un "*SAS TOKEN*"
 
 
 
@@ -93,7 +93,7 @@ Exécutez IoT Explorer et cliquez sur "*Add connection*" :
 
 ![IoTHub](pictures/011.png)
 
-Collez la chaîne de connexion puis cliquez sur "Save"
+Collez la chaîne de connexion puis cliquez sur "*Save*" :
 
 ![IoTHub](pictures/012.png)
 
@@ -101,7 +101,7 @@ Vous devez alors voir les appareils présents dans votre IoT Hub. Cliquez sur un
 
 ![IoTHub](pictures/013.png)
 
-Dans la section "*Connection string with SAS token*". choisissez "*Primary key*", définisez le nombre de minutes (525 600 minutes = 1 an) avec l'expiration du jeton puis cliquez sur "*Generate*".
+Dans la section "*Connection string with SAS token*", choisissez "*Primary key*", définissez le nombre de minutes (525 600 minutes = 1 an) pour l'expiration du jeton, puis cliquez sur "*Generate*".
 
 Vous allez obtenir un jeton ressemblant à celui ci-dessous :
 
@@ -114,7 +114,7 @@ Conservez uniquement la portion commençant par "*SharedAccessSignature sr=*" co
 
 
 
-Copiez la portion ainsi genérée puis collez-là. Nous allons en avoir besoin plus tard.
+Copiez la portion ainsi générée puis collez-là. Nous allons en avoir besoin plus tard.
 
 ![IoTHub](pictures/014.png)
 
@@ -124,7 +124,7 @@ Depuis Visual Studio code, ouvrez le fichier "*SendVehicleEvent.py*" puis rensei
 
 ![IoTHub](pictures/015.png)
 
-Pour la valeur "*YOUR FILE PATH*", allez dans le "*data*", puis faîtes un clique droit sur le fichier "BusPositionV2.csv" et cliquez sur "*Copy Path*" :
+Pour la valeur "*YOUR FILE PATH*", allez dans le "*data*", puis faîtes un clic-droit sur le fichier "*BusPositionV2.csv*" et cliquez sur "*Copy Path*" :
 
 ![IoTHub](pictures/016.png)
 
@@ -140,7 +140,7 @@ Une fois les modifications faîtes, exécutez le code. Si tout va bien vous deve
 
 #### Vérification des évènements envoyés
 
-Nous allons vérifier que les évènements arrivents bien dans notre Azure IoT Hub
+Nous allons vérifier que les évènements arrivent bien dans notre Azure IoT Hub
 
 ##### Avec Azure CLI
 
@@ -150,7 +150,7 @@ az login --tenant <Your Tenant ID>
 
 ![IoTHub](pictures/019.png)
 
-Une fois connecté au bon tenant, exécutez la commande suivante (Nous allons utiliser ici un des groupes de consommateurs que nous avons créés précédement):
+Une fois connecté au bon tenant, exécutez la commande suivante (Nous allons utiliser ici un des groupes de consommateurs que nous avons créés précédemment):
 
 az iot hub monitor-events -n {iothub_name} -d {device_id} -g {resource_group} --cg {consumer_group_name}
 
@@ -174,13 +174,13 @@ Maintenant que les évènements sont ingérés dans Azure IoT hub, nous allons l
 
 ### SignalR
 
-Le service Azure SignalR simplifie le processus d’ajout de fonctionnalités web en temps réel aux applications par HTTP. Cette fonctionnalité en temps réel permet au service d’envoyer des mises à jour de contenu aux clients connectés, comme une application web ou mobile monopage. Par conséquent, les clients sont mis à jour sans avoir à interroger le serveur ni à envoyer de nouvelles requêtes HTTP de mise à jour.
+Le service Azure SignalR simplifie le processus d’ajout de fonctionnalités web en temps réel aux applications par HTTP. Cette fonctionnalité en temps réel permet au service d’envoyer des mises à jour de contenu aux clients connectés, comme une application web ou mobile. Par conséquent, les clients sont mis à jour sans avoir à interroger le serveur ni à envoyer de nouvelles requêtes HTTP de mise à jour.
 
 Depuis le portail Azure, cliquez sur "*Create a resource*"
 
 ![SignalR](pictures/023.png)
 
-Puis recherchez le service SignalR
+Puis recherchez le service SignalR :
 
 ![SignalR](pictures/024.png)
 
@@ -209,7 +209,7 @@ Cliquez sur votre service SignalR, puis sur "*Connection strings*" pour récupé
 
 ### Azure Function
 
-Nous allons maintenant créer une "*Azure Function App*" pour récupérer les évènements d'Azure IoT hub et assurer la communication en temps réel avec Azure Maps (que l'on déploira un peu plus tard)
+Nous allons maintenant créer une "*Azure Function App*" pour récupérer les évènements d'Azure IoT hub et assurer la communication en temps réel avec Azure Maps (que l'on déploiera un peu plus tard)
 
 Depuis le portail Azure, creez une nouvelle ressource et cherchez "*Function App*" :
 
@@ -233,7 +233,7 @@ Rajoutez les valeurs :
 - AzureSignalRConnectionString
 
 
-Pour la valeur "*AzureIOTHubConnectionString*" renseignez la valeur de la chaîne de connection pour IoT Hub (Event Hub-compatible endpoint) :
+Pour la valeur "*AzureIOTHubConnectionString*" renseignez la valeur de la chaîne de connexion pour IoT Hub (*Event Hub-compatible endpoint*) :
 
 
 ![Function](pictures/032.png)
@@ -252,11 +252,11 @@ Nous allons déployer le code des fonctions depuis Visual Studio Code. Avant tou
 
 ![Function](pictures/035.png)
 
-Une fois connecté, vous devriez voir vos ressources Azure:
+Une fois connecté, vous devriez voir vos ressources Azure :
 
 ![Function](pictures/036.png)
 
-le code se trouve dans le dossier "Functions". C'est le fichier "FranmerRealTimeLogistic.cs". Cliquez sur le fichier, puis depuis la palette de commandes (Ctrl + Shift + P), sélectionnez "*Azure Functions: Deploy to Function App...*" 
+le code se trouve dans le dossier "*Functions*". C'est le fichier "*FranmerRealTimeLogistic.cs*". Cliquez sur le fichier, puis depuis la palette de commandes (Ctrl + Shift + P), sélectionnez "*Azure Functions: Deploy to Function App...*" 
 
 ![Function](pictures/037.png)
 
@@ -270,11 +270,11 @@ Validez la mise à jour :
 
 ![Function](pictures/039.png)
 
-Si tout se pasde bien, vous devriez obtenir ce message à la fin du déploiment :
+Si tout se passe bien, vous devriez obtenir ce message à la fin du déploiement :
 
 ![Function](pictures/040.png)
 
-Et vous deviez voir vos 2 fonctions déployées dans Azure :
+Et vous devriez voir vos 2 fonctions déployées dans Azure :
 
 ![Function](pictures/041.png)
 
@@ -292,12 +292,12 @@ Azure Maps est une collection de services géospatiaux et de kits de développem
 - Services Search pour localiser les adresses, les lieux et les points d’intérêt dans le monde entier.
 - Diverses options de routage : point à point, multipoint, optimisation multipoint, isochrone, véhicule électrique, véhicule commercial, trafic influencé et routage par matrice.
 - Vue du flux de trafic et vue des incidents pour les applications qui ont besoin d’informations de trafic en temps réel.
-- Services de fuseau horaire (Time zone) et de géolocalisation (Geolocation).
-- Services de geofencing et stockage des données cartographiques, avec les informations d’emplacement hébergées dans Azure.
+- Services de fuseau horaire (*Time zone*) et de géolocalisation (*Geolocation*).
+- Services de *geofencing* et stockage des données cartographiques, avec les informations d’emplacement hébergées dans Azure.
 - Intelligence géographique via l’analytique géospatiale.
 
 
-La solution Azure Maps présentée ici inclus le clustering et les pop-up dynamiques.
+La solution Azure Maps présentée ici inclus le clustering et les pop-ups dynamiques.
 
 
 #### Déploiement d'Azure Maps
@@ -320,21 +320,21 @@ Azure App Service est un service HTTP pour l’hébergement d’applications web
 
 #### Déploiement Azure Web App
 
-Depuis le portail Azure, créez une nouvelle ressource et charchez pour Azure Web App :
+Depuis le portail Azure, créez une nouvelle ressource et cherchez pour Azure Web App :
 
 ![WebApp](pictures/045.png)
 
-Renseignez les informations nécessaires. Pour les champs suivants, définissez le valeurs comme indiqué ci-dessous :
+Renseignez les informations nécessaires. Pour les champs suivants, définissez les valeurs comme indiqué ci-dessous :
 
 - Publish : "Code"
 - Runtime stack : "PHP 8.2"
 - Pricing plan : "Free"
 
-Clicquez sur "Review + Create" et validez la création du service :
+Cliquez sur "Review + Create" et validez la création du service :
 
 ![WebApp](pictures/046.png)
 
-Une fois le service déployé, allez sur la page "Overview" de votre service Azure Web App et copiez la valeur "D*efault Domain*". Copiez cette valeur dans un fichier, nous en auront besoin un peu plus tard :
+Une fois le service déployé, allez sur la page "Overview" de votre service Azure Web App et copiez la valeur "*Default Domain*". Copiez cette valeur dans un fichier, nous en auront besoin un peu plus tard :
 
 ![WebApp](pictures/047.png)
 
@@ -347,15 +347,15 @@ Une fois tous les services Azure déployés, vous devriez avoir les services sui
 
 #### Définition du CORS de l'Azure Function
 
-Afin de permettre au Service Azure Maps de communiquer avec les fonctions Azure, il reste un dernier paramètrage à faire au niveau de l'Azure "*Function App*".
+Afin de permettre au Service Azure Maps de communiquer avec les fonctions Azure, il reste un dernier paramétrage à faire au niveau de l'Azure "*Function App*".
 
-Au niveau de votre "Function App", cliquez sur "*CORS*" ("Cross-Origin Resource Sharing") et rajoutez l'URL de votre application web que vous avez copiez précédement :
+Au niveau de votre "*Function App*", cliquez sur "*CORS*" ("Cross-Origin Resource Sharing") et rajoutez l'URL de votre application web que vous avez copié précédemment :
 
 ![Solution](pictures/049.png)
 
 #### Modification du code de l'application web
 
-Depuis Visual Studio Code, vérifiez que vous avez bien le compléments "Azure App Service" :
+Depuis Visual Studio Code, vérifiez que vous avez bien le complément "*Azure App Service*" :
 
 ![Solution](pictures/050.png)
 
@@ -370,7 +370,7 @@ Par exemple vous devriez obtenir quelque chose comme ci-dessous après modificat
 
 ![Solution](pictures/052.png)
 
-De plus, changer les reférences, avec l'url de votre application web, vers les images ou les services, là où c'est approprié, comme illustré ci-dessous :
+De plus, changez les références, avec l'url de votre application web, vers les images ou les services, là où c'est approprié, comme illustré ci-dessous :
 
 Pour les images :
 
@@ -383,7 +383,7 @@ Pour les fonctionnalités :
 
 #### déploiement de l'application web
 
-Depuis visual studio, Dans la partie Azure, vérifiez que vous avez bien accès à votre Application Web.
+Depuis Visual Studio Code, dans la partie Azure, vérifiez que vous avez bien accès à votre application web.
 
 ![Solution](pictures/055.png)
 
@@ -391,7 +391,7 @@ Faites un clic-droit sur votre application web et cliquez sur "*Deploy to Web Ap
 
 ![Solution](pictures/056.png)
 
-La palette de commandes va s'ouvrir en haut de l'écran. Cliquez sur "Browse..." pour sélectionner le dossier que vous souhaitez déployer :
+La palette de commandes va s'ouvrir en haut de l'écran. Cliquez sur "*Browse...*" pour sélectionner le dossier que vous souhaitez déployer :
 
 ![Solution](pictures/057.png)
 
@@ -399,7 +399,7 @@ Dans notre cas nous allons déployer le dossier "*Web*". **Double-cliquez** sur 
 
 ![Solution](pictures/058.png)
 
-Cliquez sur "Deploy" :
+Cliquez sur "*Deploy*" :
 
 ![Solution](pictures/059.png)
 
@@ -413,9 +413,9 @@ Vous devez avoir un nouvel onglet qui s'ouvre dans votre navigateur web affichan
 
 #### Suivre les bus en temps réels
 
-Nous allons mainenant envoyer des évènements à IoT Hub pour les afficher en presque temps réel sur notre carte Azure Maps.
+Nous allons maintenant envoyer des évènements à IoT Hub pour les afficher en presque temps réel sur notre carte Azure Maps.
 
-Dans l'explorateur de fichiers de Visual Studio Code, cliquez sur "*SendVehicleEvents.py*" qui se trouve dans le dossier "*producer*". Ckiquez sur le bouton "*play*" qui se trouve en haut à droite de l'écran :
+Dans l'explorateur de fichiers de Visual Studio Code, cliquez sur "*SendVehicleEvents.py*" qui se trouve dans le dossier "*producer*". Cliquez sur le bouton "*play*" qui se trouve en haut à droite de l'écran :
 
 ![Solution](pictures/062.png)
 
@@ -433,8 +433,8 @@ Ci-dessous un petit Gif animé pour illustrer la solution avec le clustering, la
 
 ## Comment débugguer
 
-Après avoir publié votre page web, dans votre nagigateur web, appuyez sur la touche F12 et analysez les erreurs retournées.
+Après avoir publié votre page web, dans votre navigateur web, appuyez sur la touche **F12** et analysez les erreurs retournées.
 
-Ci-dessous un exemple des erreurs communes avec une mauvaise référence des images et une mauvaise configuration des "applications settions" au niveau d'Azure "*Function App*" :
+Ci-dessous un exemple des erreurs communes avec une mauvaise référence des images et une mauvaise configuration des "*applications settings*" au niveau d'Azure "*Function App*" :
 
 ![Solution](pictures/065.png)
