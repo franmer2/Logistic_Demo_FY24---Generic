@@ -317,7 +317,7 @@ Depuis le portail Azure, créez une nouvelle ressource et charchez pour Azure We
 
 ![WebApp](pictures/045.png)
 
-Renseignez les informations nécessaires :
+Renseignez les informations nécessaires. Pour les champs suivants, définissez le valeurs comme indiqué ci-dessous :
 
 - Publish : "Code"
 - Runtime stack : "PHP 8.2"
