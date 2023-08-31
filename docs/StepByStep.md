@@ -42,7 +42,7 @@ Puis cochez les 4 cases avant de cliquez sur le bouton "Update" :
 
 ![IoTHub](pictures/005.png).
 
-## Creation d'un appareil
+#### Creation d'un appareil
 
 Au niveau de votre service Azure IoT Hub, sur la gauche, cliquez sur "*Devices*" puis sur "*Add Device*"
 
@@ -59,7 +59,7 @@ Cliquez sur "*Refresh*" pour voir votre appareil dans la liste
 
 ![IoTHub](pictures/008.png)
 
-## Création des groupes de consommateurs
+#### Création des groupes de consommateurs
 
 Les groupes de consommateurs sont une vue d’État du hub. Ils permettent à plusieurs applications consommatrices d’avoir chacune leur propre vue du flux d’événements et de lire le flux indépendamment. Cela signifie que lorsqu’une application cesse de lire à partir d’un flux d’événements, elle peut continuer là où elle s’est arrêté. Il est préférable pour chaque application d’avoir son propre groupe de consommateurs.
 
@@ -71,7 +71,7 @@ Copiez la chaîne de connection "*Event Hub-compatible endpoint*" et conservez l
 
 
 
-## Creation d'un "SAS TOKEN"
+#### Creation d'un "SAS TOKEN"
 
 
 
@@ -114,7 +114,7 @@ Copiez la portion ainsi genérée puis collez-là. Nous allons en avoir besoin p
 
 ![IoTHub](pictures/014.png)
 
-## Envoyer des évènements à Azure IoT Hub
+#### Envoyer des évènements à Azure IoT Hub
 
 Depuis Visual Studio code, ouvrez le fichier "*SendVehicleEvent.py*" puis renseignez les champs requis.
 
@@ -123,3 +123,32 @@ Depuis Visual Studio code, ouvrez le fichier "*SendVehicleEvent.py*" puis rensei
 Pour la valeur "*YOUR FILE PATH*", allez dans le "*data*", puis faîtes un clique droit sur le fichier "BusPositionV2.csv" et cliquez sur "*Copy Path*" :
 
 ![IoTHub](pictures/016.png)
+
+Après modification, vous devriez obtenir quelque chose comme illustré ci-dessous :
+
+![IoTHub](pictures/017.png)
+
+Une fois les modifications faîtes, exécutez le code. Si tout va bien vous devez voir les évènements dans le terminal :
+
+
+![IoTHub](pictures/018.png)
+
+
+#### Vérification des évènements envoyés
+
+Nous allons vérifier que les évènements arrivents bien dans notre Azure IoT Hub
+
+##### Avec Azure CLI
+
+Ouvrez une fenêtre "Command prompt" puis connectez-vous sur le bon tenant Azure avec la commande suivante :
+
+az login --tenant <Your Tenant ID>
+
+![IoTHub](pictures/019.png)
+
+Une fois connecté au bon tenant, exécutez la commande suivante (Nous allons utiliser ici un des groupes de consommateurs que nous avons créés précédement):
+
+az iot hub monitor-events -n {iothub_name} -d {device_id} -g {resource_group} --cg {consumer_group_name}
+
+![IoTHub](pictures/020.png)
+
