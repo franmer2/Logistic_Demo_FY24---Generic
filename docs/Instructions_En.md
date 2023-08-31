@@ -258,107 +258,105 @@ And you should see your 2 functions deployed in Azure:
 
 ![Function](pictures/041.png)
 
+## Serve and present
 
-## Servir et présenter
-
-Maintenant nous allons déployer les services pour servir et présenter les informations
+Now we will deploy the services to serve and present the information
 
 ### Azure Maps
 
-Azure Maps est une collection de services géospatiaux et de kits de développement logiciel (SDK) qui utilisent des données cartographiques actualisées pour fournir un contexte géographique précis à des applications web et mobiles. Azure Maps fournit les services suivants :
+Azure Maps is a collection of geospatial services and SDKs that use up-to-date map data to provide accurate geographic context for web and mobile applications. Azure Maps provides the following services:
 
-- API REST pour assurer le rendu de cartes vectorielles et raster dans plusieurs styles et une imagerie satellitaire.
-- Services de créateur pour créer et afficher des cartes basées sur des données de carte d’intérieur privées.
-- Services Search pour localiser les adresses, les lieux et les points d’intérêt dans le monde entier.
-- Diverses options de routage : point à point, multipoint, optimisation multipoint, isochrone, véhicule électrique, véhicule commercial, trafic influencé et routage par matrice.
-- Vue du flux de trafic et vue des incidents pour les applications qui ont besoin d’informations de trafic en temps réel.
-- Services de fuseau horaire (*Time zone*) et de géolocalisation (*Geolocation*).
-- Services de *geofencing* et stockage des données cartographiques, avec les informations d’emplacement hébergées dans Azure.
-- Intelligence géographique via l’analytique géospatiale.
+- REST API to render vector and raster maps in multiple styles and satellite imagery.
+- Creator services to create and display maps based on private interior map data.
+- Search services to locate addresses, places and points of interest worldwide.
+- Various routing options: point-to-point, multipoint, multipoint optimization, isochronous, electric vehicle, commercial vehicle, influenced traffic and matrix routing.
+- Traffic flow view and incident view for applications that need real-time traffic information.
+- Time zone (*Time zone*) and geolocation (*Geolocation*) services.
+- *geofencing* services and map data storage, with location information hosted in Azure.
+- Geographic intelligence via geospatial analytics.
+
+The Azure Maps solution shown here includes clustering and dynamic pop-ups.
 
 
-La solution Azure Maps présentée ici inclus le clustering et les pop-ups dynamiques.
+#### Deploying Azure Maps
 
-
-#### Déploiement d'Azure Maps
-
-Depuis le portail Azure, créez une nouvelle ressource et cherchez Azure Maps. Cliquez sur "*Create*" :
+From the Azure portal, create a new resource and search for Azure Maps. Click on "*Create*":
 
 ![Maps](pictures/042.png)
 
-Renseignez les informations nécessaires. Pour le niveau de prix, choisissez "*Gen2 (Maps and Location Insights)*" : 
+Fill in the necessary information. For the price tier, choose "*Gen2 (Maps and Location Insights)*": 
 
 ![Maps](pictures/043.png)
 
-Une fois le service déployé, depuis le portail Azure, cliquez sur votre service Azure Maps, puis cliquez sur "*Authentication*". Copiez la clef primaire du service et copiez là dans un fichier. On en aura besoin un peu plus tard :
+Once the service is deployed, from the Azure portal, click on your Azure Maps service, and then click "*Authentication*". Copy the primary key of the service and copy it to a file. We will need it a little later:
 
 ![Maps](pictures/044.png)
 
 ### Azure Web App
 
-Azure App Service est un service HTTP pour l’hébergement d’applications web, d’API REST et de backends mobiles. Vous pouvez développer dans votre langage de prédilection, à savoir .NET, .NET Core, Java, Node.js, PHP et Python. Les applications s’exécutent et sont mises à l’échelle facilement dans les environnements Windows et Linux.
+Azure App Service is an HTTP service for hosting web apps, REST APIs, and mobile backends. You can develop in your preferred language, namely .NET, .NET Core, Java, Node.js, PHP and Python. Applications run and scale easily in Windows and Linux environments.
 
-#### Déploiement Azure Web App
+#### Azure Web App deployment
 
-Depuis le portail Azure, créez une nouvelle ressource et cherchez pour Azure Web App :
+From the Azure portal, create a new resource and search for Azure Web App:
 
 ![WebApp](pictures/045.png)
 
-Renseignez les informations nécessaires. Pour les champs suivants, définissez les valeurs comme indiqué ci-dessous :
+Fill in the necessary information. For the following fields, set the values as shown below:
 
-- Publish : "Code"
-- Runtime stack : "PHP 8.2"
-- Pricing plan : "Free"
+- Publish: "Code"
+- Runtime stack: "PHP 8.2"
+- Pricing plan: "Free"
 
-Cliquez sur "Review + Create" et validez la création du service :
+Click on "Review + Create" and validate the creation of the service:
 
 ![WebApp](pictures/046.png)
 
-Une fois le service déployé, allez sur la page "Overview" de votre service Azure Web App et copiez la valeur "*Default Domain*". Copiez cette valeur dans un fichier, nous en auront besoin un peu plus tard :
+Once the service is deployed, go to the "Overview" page of your Azure Web App service and copy the "*Default Domain*" value. Copy this value to a file, we will need it a little later:
 
 ![WebApp](pictures/047.png)
 
-### Déploiement
+### Deployment
 
-Une fois tous les services Azure déployés, vous devriez avoir les services suivants dans votre groupe de ressources :
-
+After all Azure services are deployed, you should have the following services in your resource group:
 
 ![Solution](pictures/048.png)
 
-#### Définition du CORS de l'Azure Function
+#### Azure Function CORS definition
 
-Afin de permettre au Service Azure Maps de communiquer avec les fonctions Azure, il reste un dernier paramétrage à faire au niveau de l'Azure "*Function App*".
+In order to allow the Azure Maps Service to communicate with Azure functions, there is one last configuration to be made at the Azure level "*Function App*".
 
-Au niveau de votre "*Function App*", cliquez sur "*CORS*" ("Cross-Origin Resource Sharing") et rajoutez l'URL de votre application web que vous avez copié précédemment :
+At your "*Function App*", click on "*CORS*" ("Cross-Origin Resource Sharing") and add the URL of your web application that you copied earlier:
 
 ![Solution](pictures/049.png)
 
-#### Modification du code de l'application web
+#### Modifying the web application code
 
-Depuis Visual Studio Code, vérifiez que vous avez bien le complément "*Azure App Service*" :
+From Visual Studio Code, verify that you have the "*Azure App Service*" add-in:
 
 ![Solution](pictures/050.png)
 
-Revenez dans la partie "*Explorer*" de Visual Studio Code, dans le dossier "*Web*" cliquez sur le fichier "*Index.html*". Remplacez les valeurs suivantes :
+Go back to the "*Explorer*" part of Visual Studio Code, in the "*Web*" folder click the "*Index.html*" file. Replace the following values:
 
-- baseurl (l'url de votre Azure Function App)
-- subscriptionKey (la clef de votre service Azure Maps)
+- baseurl (the url of your Azure Function App)
+- subscriptionKey (the key to your Azure Maps service)
 
 ![Solution](pictures/051.png)
 
-Par exemple vous devriez obtenir quelque chose comme ci-dessous après modifications :
+For example you should get something like below after modifications:
 
 ![Solution](pictures/052.png)
 
-De plus, changez les références, avec l'url de votre application web, vers les images ou les services, là où c'est approprié, comme illustré ci-dessous :
+In addition, change the references, with the url of your web application, to images or services, where appropriate, as shown below:
 
-Pour les images :
+For images:
 
 ![Solution](pictures/053.png)
 
-Pour les fonctionnalités :
+For features:
 
 ![Solution](pictures/054.png)
+
 
 
 #### déploiement de l'application web
