@@ -337,3 +337,11 @@ Une fois tous les services Azure déployés, vous devriez avoir les services sui
 
 
 ![Solution](pictures/048.png)
+
+#### Définition du CORS de l'Azure Function
+
+Afin de permettre au Service Azure Maps de communiquer avec les fonctions Azure, il reste un dernier paramètrage à faire au niveau de l'Azure "*Function App*".
+
+Au niveau de votre "Function App", cliquez sur "*CORS*" ("Cross-Origin Resource Sharing") et rajoutez l'URL de votre application web que vous avez copiez précédement :
+
+![Solution](pictures/049.png)
