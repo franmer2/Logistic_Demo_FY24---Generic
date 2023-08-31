@@ -192,72 +192,69 @@ Click your SignalR service, then click "*Connection strings*" to retrieve the co
 
 ### Azure Function
 
-Nous allons maintenant créer une "*Azure Function App*" pour récupérer les évènements d'Azure IoT hub et assurer la communication en temps réel avec Azure Maps (que l'on déploiera un peu plus tard)
+We will now create an "*Azure Function App*" to retrieve events from Azure IoT hub and ensure real-time communication with Azure Maps (which we will deploy a little later)
 
-Depuis le portail Azure, creez une nouvelle ressource et cherchez "*Function App*" :
+From the Azure portal, create a new resource and search for "*Function App*":
 
 ![Function](pictures/028.png)
 
-Définissez les options comme illustré sur la copie d'écran ci-dessous et cliquez sur "*Review + create*", puis validez la création de la "*Function App*" :
+Set the options as shown in the screenshot below and click on "*Review + create*", then validate the creation of the "*Function App*":
 
 ![Function](pictures/029.png)
 
-Depuis le portail Azure, allez dans votre groupe de ressources et cliquez sur la "*Function App*" nouvellement déployée :
+From the Azure portal, go to your resource group and click on the newly deployed "*Function App*":
 
 ![Function](pictures/030.png)
 
-Puis cliquez sur "Configuration. Dans "application settings" cliquez sur "New Application setting"
+Then click on "Configuration. In "application settings" click on "New application setting"
 
 ![Function](pictures/031.png)
 
-Rajoutez les valeurs :
+Add the values:
 
 - AzureIOTHubConnectionString
 - AzureSignalRConnectionString
 
-
-Pour la valeur "*AzureIOTHubConnectionString*" renseignez la valeur de la chaîne de connexion pour IoT Hub (*Event Hub-compatible endpoint*) :
-
+For the value "*AzureIOTHubConnectionString*" fill in the value of the connection string for IoT Hub (*Event Hub-compatible endpoint*):
 
 ![Function](pictures/032.png)
 
-Pour la valeur "*AzureSignalRConnectionString*" renseignez la chaîne de connexion du service SignalR : 
+For the value "*AzureSignalRConnectionString*" specify the connection string of the SignalR service: 
 
 ![Function](pictures/033.png)
 
-N'oubliez pas de sauvegarder vos modifications en cliquant sur le bouton "*Save*" :
+Don't forget to save your changes by clicking on the "*Save*" button:
 
 ![Function](pictures/034.png)
 
-#### Deploiement du code
 
-Nous allons déployer le code des fonctions depuis Visual Studio Code. Avant toute chose, vérifiez que vous êtes bien connectez à Azure :
+#### Code deployment
+
+We will deploy the function code from Visual Studio Code. First, make sure you're signed in to Azure:
 
 ![Function](pictures/035.png)
 
-Une fois connecté, vous devriez voir vos ressources Azure :
+Once signed in, you should see your Azure resources:
 
 ![Function](pictures/036.png)
 
-le code se trouve dans le dossier "*Functions*". C'est le fichier "*FranmerRealTimeLogistic.cs*". Cliquez sur le fichier, puis depuis la palette de commandes (Ctrl + Shift + P), sélectionnez "*Azure Functions: Deploy to Function App...*" 
+the code is located in the "*Functions*" folder. This is the file "*FranmerRealTimeLogistic.cs*". Click the file, and then from the command palette (Ctrl + Shift + P), select "*Azure Functions: Deploy to Function App... *" 
 
 ![Function](pictures/037.png)
 
-
-Puis sélectionnez votre "*Function App*" :
-
+Then select your "*Function App*":
 
 ![Function](pictures/038.png)
 
-Validez la mise à jour :
+Validate the update:
 
 ![Function](pictures/039.png)
 
-Si tout se passe bien, vous devriez obtenir ce message à la fin du déploiement :
+If all goes well, you should get this message at the end of the deployment:
 
 ![Function](pictures/040.png)
 
-Et vous devriez voir vos 2 fonctions déployées dans Azure :
+And you should see your 2 functions deployed in Azure:
 
 ![Function](pictures/041.png)
 
