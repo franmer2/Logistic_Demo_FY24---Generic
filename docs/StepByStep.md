@@ -152,3 +152,32 @@ az iot hub monitor-events -n {iothub_name} -d {device_id} -g {resource_group} --
 
 ![IoTHub](pictures/020.png)
 
+Si tout va bien, une fois la commande Azure CLI exécutée vous devriez voir les évènements qui entrent dans Azure IoT Hub :
+
+![IoTHub](pictures/021.png)
+
+#### Azure IoT Explorer
+
+Il est aussi possible de surveiller les évènements entrant avec Azure IoT Explorer :
+
+
+![IoTHub](pictures/022.png)
+
+## Traitement des évènements
+
+
+Maintenant que les évènements sont ingérés dans Azure IoT hub, nous allons les récupérer pour les exploiter.
+
+### SignalR
+
+Le service Azure SignalR simplifie le processus d’ajout de fonctionnalités web en temps réel aux applications par HTTP. Cette fonctionnalité en temps réel permet au service d’envoyer des mises à jour de contenu aux clients connectés, comme une application web ou mobile monopage. Par conséquent, les clients sont mis à jour sans avoir à interroger le serveur ni à envoyer de nouvelles requêtes HTTP de mise à jour.
+
+Depuis le portail Azure, cliquez sur "*Create a resource*"
+
+![IoTHub](pictures/023.png)
+
+Puis recherchez le service SignalR
+
+![IoTHub](pictures/024.png)
+
+
