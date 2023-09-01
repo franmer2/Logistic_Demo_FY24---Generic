@@ -2,7 +2,7 @@
 
 In this article, I will present the steps to set up, from start to finish, a solution for monitoring a fleet of vehicles in real time. 
 
-There is also a video here
+There is also a video [here](https://github.com/franmer2/Logistic_Demo_FY24---Generic/tree/main/video)
 
 ![Architecture](pictures/000.png)
 
