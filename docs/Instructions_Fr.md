@@ -2,6 +2,8 @@
 
 Dans cet article, je vais vous présenter les étapes pour mettre en place, de bout en bout, une solution de suivi d'une flotte de véhicules en temps réel. 
 
+Une vidéo est aussi disponible ici (en Anglais. Enfin... mon Anglais 😅)
+
 ![Architecture](pictures/000.png)
 
 Après avoir suivi cet article, vous aurez une solution complète comme illustré dans le gif animé ci-dessous :
@@ -442,3 +444,9 @@ Après avoir publié votre page web, dans votre navigateur web, appuyez sur la t
 Ci-dessous un exemple des erreurs communes avec une mauvaise référence des images et une mauvaise configuration des "*applications settings*" au niveau d'Azure "*Function App*" :
 
 ![Solution](pictures/065.png)
+
+## Pour aller plu loin
+
+Bien entendu cette solution peut être enrichie pour rajouter, par exemple, des capacités de reporting en temps réel avec l'ajout de service tels qu'Azure Stream Analytics ou Power BI :
+
+![Solution](pictures/066.png)

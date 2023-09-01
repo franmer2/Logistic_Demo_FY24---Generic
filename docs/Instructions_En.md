@@ -2,6 +2,8 @@
 
 In this article, I will present the steps to set up, from start to finish, a solution for monitoring a fleet of vehicles in real time. 
 
+There is also a video here
+
 ![Architecture](pictures/000.png)
 
 After following this article, you will have a complete solution as illustrated in the animated gif below:
@@ -102,7 +104,9 @@ You'll get a token similar to the one below:
 *SharedAccessSignature sr=IoTHub-Logictic-AEffacer.azure-devices.net%2Fdevices%2FFranmerBuses&sig=Qq0GFga6kzgwHp0DldvpJbR1mwAwXMOAm6Lmc9UFBhQ%3D&se=2392799555*
 
 
-Copy the generated portion and paste it. We're going to need it later (You can use [Table.md](https://github.com/franmer2/Logistic_Demo_FY24---Generic/blob/main/docs/Table.md) to keep all your needed values).
+Copy the generated portion and paste it. We're going to need it later
+
+ (**You can use [Table.md](https://github.com/franmer2/Logistic_Demo_FY24---Generic/blob/main/docs/Table.md) to keep all your needed values**).
 
 ![IoTHub](pictures/014.png)
 
@@ -416,3 +420,9 @@ After publishing your web page, in your web browser, press the **F12** key and s
 Below is an example of common errors with poor image reference and misconfiguration of "*applications settings*" at the Azure "*Function App*" level:
 
 ![Solution](pictures/065.png)
+
+## To go further
+
+Of course, this solution can be enriched to add, for example, real-time reporting capabilities with the addition of services such as Azure Stream Analytics or Power BI:
+
+![Solution](pictures/066.png)
