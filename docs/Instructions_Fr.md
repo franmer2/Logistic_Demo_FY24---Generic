@@ -445,8 +445,8 @@ Ci-dessous un exemple des erreurs communes avec une mauvaise référence des ima
 
 ![Solution](pictures/065.png)
 
-## Pour aller plu loin
+## Pour aller plus loin
 
-Bien entendu cette solution peut être enrichie pour rajouter, par exemple, des capacités de reporting en temps réel avec l'ajout de service tels qu'Azure Stream Analytics ou Power BI :
+Bien entendu cette solution peut être enrichie pour rajouter, par exemple, des capacités de reporting en temps réel avec l'ajout de services tels qu'Azure Stream Analytics ou Power BI :
 
 ![Solution](pictures/066.png)
