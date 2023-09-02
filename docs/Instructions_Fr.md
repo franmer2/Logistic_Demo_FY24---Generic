@@ -2,7 +2,7 @@
 
 Dans cet article, je vais vous présenter les étapes pour mettre en place, de bout en bout, une solution de suivi d'une flotte de véhicules en temps réel. 
 
-Une vidéo est aussi disponible [ici](https://github.com/franmer2/Logistic_Demo_FY24---Generic/tree/main/video) (en Anglais. Enfin... mon Anglais 😅)
+Une vidéo est aussi disponible [ici](https://github.com/franmer2/Logistic_Demo_FY24---Generic/tree/main/video) (en Anglais. Enfin... mon Anglais 😅).
 
 ![Architecture](pictures/000.png)
 
