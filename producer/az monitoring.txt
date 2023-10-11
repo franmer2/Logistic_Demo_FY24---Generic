@@ -1,0 +1,8 @@
+az login --tenant 16b3c013-d300-468d-ac64-7eda0820b6d3
+
+az login --16b3c013-d300-468d-ac64-7eda0820b6d3
+
+az iot hub monitor-events -n {iothub_name} -d {device_id} -g {resource_group} --cg {consumer_group_name}
+
+az iot hub monitor-events -n IoT-Poc2-Franmer -d Buses -g IoT-POC --cg monitoring
+
