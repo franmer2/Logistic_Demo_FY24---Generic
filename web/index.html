@@ -22,7 +22,7 @@
     <script>
         console.log('Start JS');
         // const baseurl = 'http://localhost:7071';
-        const baseurl = 'https://function-poc-franmer.azurewebsites.net';  //<= Change value here
+        const baseurl = '<YOUR FUNCTION APP URL>';  //<= Change value here
         var map, pin, lineSource, pinSource;
         var animation;
         var map, tileLayer;
@@ -35,12 +35,11 @@
                 //Add your Azure Maps subscription key to the map SDK. Get an Azure Maps key at https://azure.com/maps
                 authOptions: {
                     authType: 'subscriptionKey',
-                    subscriptionKey: 'RXfWpz37cFo7qQZwjGSyqBOozUQ_QqTHYyGy_BcRRnY' //<= Change value here
+                    subscriptionKey: '<YOUR AZURE MAPS SUBSCRIPTION KEY>' //<= Change value here
                 },
                 style: "terra",
                 zoom: 12.5,
-                // center:[Longitude, Latitude]
-                center: [-123.116226, 49.246292],
+                center: [-73.561668, 45.508888],
                 view: 'Auto',
             });
 
@@ -61,10 +60,10 @@
 
                 //Initialize the vehicle icon layers
                 // CHANGE THE WEB APP URL IF NEEDED TO POINT TO THE PICTURES!
-                map.imageSprite.add('full-icon', 'https://webapp-poc-franmer.azurewebsites.net/images/noun-bus-noir.svg');
-                map.imageSprite.add('fewseats-icon', 'https://webapp-poc-franmer.azurewebsites.net/images/noun-bus-jaune.svg');
-                map.imageSprite.add('standing-icon', 'https://webapp-poc-franmer.azurewebsites.net/images/noun-bus-rouge.svg');
-                map.imageSprite.add('bus-icon', 'https://webapp-poc-franmer.azurewebsites.net/images/noun-bus-bleu.svg');
+                map.imageSprite.add('full-icon', 'https://franmer-logisitcwebapp.azurewebsites.net/images/noun-bus-noir.svg');
+                map.imageSprite.add('fewseats-icon', 'https://franmer-logisitcwebapp.azurewebsites.net/images/noun-bus-jaune.svg');
+                map.imageSprite.add('standing-icon', 'https://franmer-logisitcwebapp.azurewebsites.net/images/noun-bus-rouge.svg');
+                map.imageSprite.add('bus-icon', 'https://franmer-logisitcwebapp.azurewebsites.net/images/noun-bus-bleu.svg');
 
 
                 //Initialize the weather tile layer.
@@ -228,35 +227,33 @@
         function ProcessVehicleData(flight) {
             var vehicleJson = JSON.parse(flight)
 
-            if (datasource.shapesMap.has(vehicleJson.VehicleNo)) {
-                var coords = [parseFloat(vehicleJson.Longitude), parseFloat(vehicleJson.Latitude)]
-                console.log('Vehicle Coordinates: ', vehicleJson.VehicleNo, coords)
-                atlas.animations.setCoordinates(vehicles[vehicleJson.VehicleNo], coords, { duration: 3000, autoPlay: true });
-                vehicles[vehicleJson.VehicleNo].addProperty('vehicleOccupancy', vehicleJson.Destination);
-                vehicles[vehicleJson.VehicleNo].addProperty('vehicleCurrentStatus', vehicleJson.Direction);
-                vehicles[vehicleJson.VehicleNo].addProperty('image', "bus-icon");
+            if (datasource.shapesMap.has(vehicleJson.id)) {
+                var coords = [parseFloat(vehicleJson.vehicle.position.longitude), parseFloat(vehicleJson.vehicle.position.latitude)]
+                console.log('Vehicle Coordinates: ', vehicleJson.id, coords)
+                atlas.animations.setCoordinates(vehicles[vehicleJson.id], coords, { duration: 3000, autoPlay: true });
+                vehicles[vehicleJson.id].addProperty('vehicleOccupancy', vehicleJson.vehicle.occupancyStatus);
+                vehicles[vehicleJson.id].addProperty('vehicleCurrentStatus', vehicleJson.vehicle.currentStatus);
                 
-                // if (vehicleJson.vehicle.occupancyStatus == 'FEW_SEATS_AVAILABLE') { vehicles[vehicleJson.id].addProperty('image', "fewseats-icon"); }
-                //else if (vehicleJson.vehicle.occupancyStatus == 'STANDING_ROOM_ONLY') { vehicles[vehicleJson.id].addProperty('image', "standing-icon"); }
-                //else if (vehicleJson.vehicle.occupancyStatus == 'FULL') { vehicles[vehicleJson.id].addProperty('image', "full-icon"); }
-                //else { vehicles[vehicleJson.id].addProperty('image', "bus-icon"); }
+                if (vehicleJson.vehicle.occupancyStatus == 'FEW_SEATS_AVAILABLE') { vehicles[vehicleJson.id].addProperty('image', "fewseats-icon"); }
+                else if (vehicleJson.vehicle.occupancyStatus == 'STANDING_ROOM_ONLY') { vehicles[vehicleJson.id].addProperty('image', "standing-icon"); }
+                else if (vehicleJson.vehicle.occupancyStatus == 'FULL') { vehicles[vehicleJson.id].addProperty('image', "full-icon"); }
+                else { vehicles[vehicleJson.id].addProperty('image', "bus-icon"); }
 
 
             } else {
                 // console.log("its not here")
-                var newVehiclePin = new atlas.Shape(new atlas.data.Point([vehicleJson.Longitude, vehicleJson.Latitude]), vehicleJson.VehicleNo);
-                newVehiclePin.addProperty('vehicleOccupancy', vehicleJson.Destination);
-                newVehiclePin.addProperty('vehicleCurrentStatus', vehicleJson.Direction);
-                newVehiclePin.addProperty('image', "bus-icon");
+                var newVehiclePin = new atlas.Shape(new atlas.data.Point([vehicleJson.vehicle.position.longitude, vehicleJson.vehicle.position.latitude]), vehicleJson.id);
+                newVehiclePin.addProperty('vehicleOccupancy', vehicleJson.vehicle.occupancyStatus);
+                newVehiclePin.addProperty('vehicleCurrentStatus', vehicleJson.vehicle.currentStatus);
                 // check vechicleJson value of vehicle and attach a shape property to represent the shape image
-                //if (vehicleJson.vehicle.occupancyStatus == 'FEW_SEATS_AVAILABLE') { newVehiclePin.addProperty('image', "fewseats-icon"); }
-                //else if (vehicleJson.vehicle.occupancyStatus == 'STANDING_ROOM_ONLY') { newVehiclePin.addProperty('image', "standing-icon"); }
-                //else if (vehicleJson.vehicle.occupancyStatus == 'FULL') { newVehiclePin.addProperty('image', "full-icon"); }
-                //else { newVehiclePin.addProperty('image', "bus-icon"); }
-                newVehiclePin.addProperty('VehicleID', vehicleJson.VehicleNo);
-                vehicles[vehicleJson.VehicleNo] = newVehiclePin;
+                if (vehicleJson.vehicle.occupancyStatus == 'FEW_SEATS_AVAILABLE') { newVehiclePin.addProperty('image', "fewseats-icon"); }
+                else if (vehicleJson.vehicle.occupancyStatus == 'STANDING_ROOM_ONLY') { newVehiclePin.addProperty('image', "standing-icon"); }
+                else if (vehicleJson.vehicle.occupancyStatus == 'FULL') { newVehiclePin.addProperty('image', "full-icon"); }
+                else { newVehiclePin.addProperty('image', "bus-icon"); }
+                newVehiclePin.addProperty('VehicleID', vehicleJson.id);
+                vehicles[vehicleJson.id] = newVehiclePin;
                 //datasource.add(Object.values(vehicles));
-                datasource.add(vehicles[vehicleJson.VehicleNo])
+                datasource.add(vehicles[vehicleJson.id])
             }
 
             //Logging:
@@ -341,7 +338,7 @@
 
         // load water body data
         function loadWaterData(datasource) {
-            fetch('https://webapp-poc-franmer.azurewebsites.net/data/waterbodies.json').then(response => response.json()).then(body => {
+            fetch('https://franmer-logisitcwebapp.azurewebsites.net/data/waterbodies.json').then(response => response.json()).then(body => {
                 datasource.add(body)
             })
         }
